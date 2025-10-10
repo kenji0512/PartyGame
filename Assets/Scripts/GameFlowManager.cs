@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,7 @@ public class GameFlowManager : MonoBehaviour
     private int targetPlayerCount = 1;
     private List<PlayerData> players = new();
 
-    private void Awake()
+    private async void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -24,7 +25,19 @@ public class GameFlowManager : MonoBehaviour
         Instance = this;
 
         ChangeState(GameState.Title);
-        _playerInputManager.onPlayerJoined += HandlePlayerJoined;
+        if (_playerInputManager != null)
+        {
+            Debug.Log("PlayerInputManager found!");
+            _playerInputManager.onPlayerJoined -= HandlePlayerJoined;
+            _playerInputManager.onPlayerJoined += HandlePlayerJoined;
+        }
+        else
+        {
+            Debug.LogError("PlayerInputManager not assigned!");
+        }
+        //イベント購読をコードで制御
+        await TestJoinAsync();
+
     }
 
     public void ChangeState(GameState newState)
@@ -34,31 +47,64 @@ public class GameFlowManager : MonoBehaviour
     }
 
     // === 人数選択 ===
+    private async UniTask TestJoinAsync()
+    {
+        await UniTask.Delay(1000); // 1秒待機
+        ChangeState(GameState.Join);
+
+        if (_playerInputManager != null)
+        {
+            Debug.Log("Manual Join triggered!");
+            _playerInputManager.JoinPlayer();
+        }
+    }
     public void SetTargetPlayers(int count)
     {
         targetPlayerCount = Mathf.Clamp(count, 1, 4);
         players.Clear();
 
-        // 1P はすでにいる前提
         ChangeState(GameState.Join);
-        //_playerInputManager.maxPlayerCount = targetPlayerCount;
     }
 
     // === 参加処理 ===
-    private void HandlePlayerJoined(PlayerInput playerInput)
+
+    public async void HandlePlayerJoined(PlayerInput playerInput)
     {
         if (CurrentState != GameState.Join) return;
 
+        if (players.Count >= targetPlayerCount)
+        {
+            // 予定人数を超えた参加は拒否
+            Destroy(playerInput.gameObject);
+            return;
+        }
+
         int playerIndex = players.Count + 1;
-        players.Add(new PlayerData(playerIndex, playerInput));
+        PlayerData newPlayer = new PlayerData(playerIndex, playerInput);
 
         Debug.Log($"Player {playerIndex} joined! ({players.Count}/{targetPlayerCount})");
+
+        // デバイスと ControlScheme の安全なセットアップ
+        playerInput.neverAutoSwitchControlSchemes = true;
+
+        // PlayerController にイベントハンドラ登録
+        await UniTask.WaitUntil(() => playerInput.actions != null);
+
+        var controller = playerInput.GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.SetupInputActionsAsync(playerInput).Forget();
+        }
+
+        players.Add(newPlayer);
 
         if (players.Count == targetPlayerCount)
         {
             ChangeState(GameState.Ready);
         }
+        Debug.Log("Joined");
     }
+
 
     // === Ready処理 ===
     public void SetPlayerReady(int playerIndex)
@@ -78,7 +124,7 @@ public class GameFlowManager : MonoBehaviour
     {
         ChangeState(GameState.Playing);
         Debug.Log("All players ready! Game Start!");
-        // ゲーム開始処理をここに
+        GameManager.Instance.StartGame(); // ← ここで本編開始
     }
 }
 
