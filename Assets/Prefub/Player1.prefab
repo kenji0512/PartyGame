@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5873812942796961537}
   - component: {fileID: 4112709453389036075}
   - component: {fileID: 9198400093495706092}
-  - component: {fileID: 8732634854360040846}
   - component: {fileID: 3094190897131439785}
   - component: {fileID: 6332236264089771794}
-  - component: {fileID: 1010790260826632708}
+  - component: {fileID: 1754480182274764794}
+  - component: {fileID: 379407767221281943}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -91,28 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8732634854360040846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3429282306455817593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b4b583da2e3d343a3ec0a1360c6ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _turnSpeed: 100
-  _jumpForce: 5
-  _inputSmoothSpeed: 10
-  _groundCheck: {fileID: 1694475098756235833}
-  _groundRadius: 0.2
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _jumpActionName: Jump
 --- !u!136 &3094190897131439785
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -163,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1010790260826632708
+--- !u!114 &1754480182274764794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 5c476200cc54a3c4590890927cf200cd, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -187,12 +165,44 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eee5a5ad-580e-47ea-88bc-3a6eab0efaa9
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98fb94c3-f771-4c51-8315-ca13dbb8c7d6
+    m_ActionName: 'UI/Join[/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 41b01037-ae8b-435e-85f1-72a49ce67aec
+    m_ActionName: 'Player/Jump[/XInputControllerWindows/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Controll1
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &379407767221281943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429282306455817593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b4b583da2e3d343a3ec0a1360c6ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 100
+  jumpForce: 5
+  groundCheck: {fileID: 0}
+  groundRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6176651400191248466
 GameObject:
   m_ObjectHideFlags: 0
