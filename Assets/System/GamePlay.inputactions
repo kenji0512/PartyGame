@@ -18,16 +18,7 @@
                 {
                     "name": "Jump",
                     "type": "Button",
-                    "id": "aaac1ada-388c-46fe-b3f1-c06dd4511c0c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Join",
-                    "type": "Button",
-                    "id": "94d8465f-bd24-4a7d-af98-538244fb08f0",
+                    "id": "41b01037-ae8b-435e-85f1-72a49ce67aec",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -256,52 +247,91 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "19ee0c00-8375-4fa8-a4a7-38348cd0d25c",
-                    "path": "<Keyboard>/space",
+                    "name": "2D Vector",
+                    "id": "573178ed-eb7d-4a62-8572-daa56477ad5a",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Controll1",
-                    "action": "Jump",
-                    "isComposite": false,
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "up",
+                    "id": "a9548f39-86d8-429b-b36f-cf3d5a408216",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "0c782530-c1ce-45a0-9c9b-90b11c584690",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ea577681-26c8-4388-8afe-05d7493909ad",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f0ba3cd0-9ad1-40e3-867f-becec1093e22",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "3be6a694-ed30-421b-9963-9d473f74b1f2",
+                    "id": "895702f6-22ac-4515-9401-30ebb45e9b55",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Controll2",
+                    "groups": ";Gamepad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "a9165a84-6bcd-4b99-9ed1-718436720401",
+            "actions": [
                 {
-                    "name": "",
-                    "id": "566f4fb9-35a2-42ed-b2d5-6a6f59dafcf6",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "98fb94c3-f771-4c51-8315-ca13dbb8c7d6",
+                    "expectedControlType": "",
                     "processors": "",
-                    "groups": ";Controll3",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6e9db263-37d8-4a20-9fb5-664437ec20ab",
-                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
-                    "processors": "",
-                    "groups": ";Controll4",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "2063bd52-3607-40f2-8267-5d9dab8b41cf",
+                    "id": "f161803e-890e-45d4-bf34-b98806da1fe1",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -333,6 +363,17 @@
             "name": "Controll4",
             "bindingGroup": "Controll4",
             "devices": []
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }
